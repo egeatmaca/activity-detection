@@ -15,6 +15,11 @@ We should do it, because OpenCV packages are incompatiable with eachother, if th
 <br/> for feature extraction: python3 feature_extraction.py
 <br/> for data prep., model tuning, training: python3 activity_detection_modeling.py or jupyter notebook activity_detection_modeling.ipynb
 <br/> for prediction: python3 activity_detection_prediction.py
+---
+
+Run real-time prediction with webcam and docker:
+1. Build: docker build -t activity-detection .
+2. Run: docker run --pid=host -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:ro --privileged --device=/dev/video0 activity-detection
 
 ---
 #### Resources
