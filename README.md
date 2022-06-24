@@ -19,14 +19,10 @@ This needs to be done because OpenCV packages are incompatiable with eachother, 
 
 ---
 
-## Run real-time prediction with docker using webcam
-#### build from Docker image:
+## Run real-time prediction with webcam and docker:
 1. Build:  <pre><code> docker build -t activity-detection . </code></pre>
 2. Add Root to Access Control List: <pre><code> xhost +local:root </code></pre>
 3. Run: <pre><code> docker run --pid=host -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:ro --privileged --device=/dev/video0 activity-detection </code></pre> 
-#### using Docker Compose:
-1. Add Root to Access Control List: <pre><code> xhost +local:root </code></pre>
-2. Run: <pre><code> docker-compose up </code></pre>
 
 ---
 #### Resources
