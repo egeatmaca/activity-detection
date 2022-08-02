@@ -5,10 +5,9 @@ RUN apt-get update && apt-get upgrade -y
 # set timezone
 RUN apt update && apt install tzdata -y
 ENV TZ="Europe/Berlin"
-# install python3 and pip3
-# RUN apt-get install python3 python3-pip -y
-# install opencv dependencies
-RUN apt-get install ffmpeg libsm6 libxext6  -y
+# install opencv and tf dependencies
+RUN apt-get install ffmpeg libsm6 libxext6 -y
+RUN apt-get install libcudnn8-dev -y
 
 # set working directory
 WORKDIR /usr/src/app
