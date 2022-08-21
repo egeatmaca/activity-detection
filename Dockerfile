@@ -7,7 +7,6 @@ RUN apt update && apt install tzdata -y
 ENV TZ="Europe/Berlin"
 # install opencv and tf dependencies
 RUN apt-get install ffmpeg libsm6 libxext6 -y
-RUN apt-get install libcudnn8-dev -y
 
 # set working directory
 WORKDIR /usr/src/app
@@ -16,7 +15,7 @@ COPY . /usr/src/app
 
 # install the requirements
 RUN pip3 install -r requirements.txt
-RUN pip3 install opencv-python==4.5.5.64 opencv-contrib-python==4.5.5.64
+RUN pip3 install opencv-python==4.5.5.64
 
 # set env. variables
 ENV PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python

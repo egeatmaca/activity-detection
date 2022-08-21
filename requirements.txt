@@ -10,7 +10,6 @@ tensorflow-hub
 scikit_learn==1.1.1
 openpyxl
 requests==2.28.0
-eli5
 shap
 # opencv-python==4.5.5.64
 # opencv-python-headless==4.5.5.64

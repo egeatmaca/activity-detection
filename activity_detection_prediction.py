@@ -10,7 +10,7 @@ import numpy as np
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 activity_detector = pickle.load(
-    open('./models/activity_detection_model__body_angles_focus_objects.pkl', 'rb'))
+    open('./models/activity_detection__body_angles_focus_objects.pkl', 'rb'))
 
 
 """  # Visualization of Pose Estimation and Activity Detection"""
@@ -22,7 +22,7 @@ if __name__ == '__main__':
     # Setup mediapipe instance
     with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
         # Initialize probability list
-        probas, proba_counter = [], 0
+        probas, mean_proba, proba_counter = [], -1, 0
         activity = ''
         while cap.isOpened():
             ret, frame = cap.read()
