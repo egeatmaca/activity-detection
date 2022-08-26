@@ -61,7 +61,7 @@ def calculate_all_angles(landmarks):
         'ELBOW': ['SHOULDER', 'ELBOW', 'WRIST'],
         'HIP': ['KNEE', 'HIP', 'SHOULDER'],
         'KNEE': ['HIP', 'KNEE', 'ANKLE'],
-        'ANKLE': ['KNEE', 'ANKLE', 'PINKY']
+        'ANKLE': ['KNEE', 'ANKLE', 'FOOT_INDEX']
     }
 
     angles = {}
@@ -129,8 +129,10 @@ def sightline_intersects(ear, nose, obj_xmin, obj_ymin, obj_xmax, obj_ymax, img_
   sightline = (nose[0]-ear[0], nose[1]-ear[1])
   current_point = (nose[0], nose[1])
   intersects = False
-  while current_point[0] < img_shape[0] and current_point[1] < img_shape[1] and current_point[0] > 0 and current_point[0] > 0 and not intersects:
-      if current_point[0] < obj_xmax and current_point[1] < obj_ymax and current_point[0] > obj_xmin and current_point[0] > obj_ymin:
+  while current_point[0] < img_shape[0] and current_point[1] < img_shape[1] \
+          and current_point[0] > 0 and current_point[0] > 0 and not intersects:
+      if current_point[0] < obj_xmax and current_point[1] < obj_ymax \
+              and current_point[0] > obj_xmin and current_point[0] > obj_ymin:
           intersects = True
       else:
           current_point = (
@@ -215,21 +217,17 @@ def focus_objects(image):
                     pd.DataFrame({'looks_at_'+key: [value] for key, value in looks_at_.items()})], axis=1)
 
 
-def extract_features(image):
-  angles = None
-  focus_objects_ = None
+def extract_features(image, extract_focus_objects=False):
+  features = None
   # estimate pose landmarks
   landmarks = estimate_pose(image)
   if landmarks:
-    # calculate all angles
-    angles = calculate_all_angles(landmarks)
-    # find what is at the hand and what is at the sightline
-    focus_objects_ = focus_objects(image)
-    # concat features
-    features = pd.concat([angles, focus_objects_], axis=1)
-    return features
-  else:
-    return None
+    # calculate all angles and assaign to features
+    features = calculate_all_angles(landmarks)
+    if extract_focus_objects:
+      # extract focus objects and concat with features
+      features = pd.concat([features, focus_objects(image)], axis=1)
+  return features
 
 
 def process_folder(folder_path, name, label, start_iter=0):
@@ -247,7 +245,7 @@ def process_folder(folder_path, name, label, start_iter=0):
             # read image
             image = cv2.imread(img_path)
             # extract features
-            features = extract_features(image)
+            features = extract_features(image, extract_focus_objects=False)
             del image
             gc.collect()
             data = pd.concat([data, features])

@@ -1,7 +1,7 @@
 import cv2
 import mediapipe as mp
 from feature_extraction import extract_features
-from visualization import draw_landmarks, draw_text
+from visualization import draw_text
 import pickle
 import requests
 import os
@@ -10,7 +10,7 @@ import numpy as np
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 activity_detector = pickle.load(
-    open('./models/activity_detection__body_angles_focus_objects.pkl', 'rb'))
+    open('./models/activity_detection_v2.pkl', 'rb'))
 
 
 """  # Visualization of Pose Estimation and Activity Detection"""
