@@ -20,7 +20,6 @@ from glob import glob
 import time
 import gc
 import pickle
-from imblearn.over_sampling import SMOTE
 import tensorflow as tf
 import tensorflow_hub as hub
 
