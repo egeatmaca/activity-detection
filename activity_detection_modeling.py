@@ -25,7 +25,7 @@ import tensorflow_hub as hub
 
 # ## Data Preperation
 df_model = pd.read_excel(
-    'working-detection-pose+focusobjects.xlsx', engine='openpyxl')
+    'working-detection-final.xlsx', engine='openpyxl')
 X = df_model.drop(columns='label')
 y = df_model['label']
 
