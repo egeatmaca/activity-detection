@@ -1,3 +1,5 @@
+#!/bin/sh
+
 FROM python:3.8.13-bullseye
 
 # update and upgrade
@@ -6,7 +8,6 @@ RUN apt-get update && apt-get upgrade -y
 RUN apt update && apt install tzdata -y
 ENV TZ="Europe/Berlin"
 # install opencv and tf dependencies
-#!/bin/sh
 
 RUN apt-get install ffmpeg libsm6 libxext6 -y
 
